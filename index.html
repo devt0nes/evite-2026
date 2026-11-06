@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ff0000" />
+    <title>STOP!!!</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="invite-shell">
+      <section class="gate" id="gate" aria-live="polite">
+        <img class="gate-image" id="gate-image" src="assets/stop.png" alt="" />
+        <div class="dialogue" id="dialogue">
+          <p id="dialogue-text">STOP!!!</p>
+          <form id="name-form" class="name-form" hidden>
+            <label for="human-name">What's your human name?</label>
+            <input id="human-name" name="human-name" autocomplete="off" required />
+            <button type="submit">Enter</button>
+            <p id="verification-status" class="verification-status" hidden aria-live="polite"></p>
+          </form>
+          <div class="success" id="success" hidden>
+            <p>Congrats <span id="success-name"></span>!<br />You're on the list! You may proceed.</p>
+            <button id="proceed-invite" type="button">Continue</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="invitation" id="invitation" aria-labelledby="invite-title" aria-hidden="true" hidden>
+        <div class="card">
+          <div class="scroll-text" id="story" aria-live="polite">
+            <span id="story-intro"></span>
+            <span id="story-body"></span>
+            <span id="story-shout"></span>
+            <span id="story-question"></span>
+            <span id="choices" class="choices" hidden>
+              <button type="button" data-choice="party">Celebrate regardless, FULL WEEKEND PARTAYYYY</button>
+              <button type="button" data-choice="study">Don't celebrate at all, FULL WEEKEND STUDAYYYY</button>
+              <button type="button" data-choice="diwali">Celebrate . . . with Diwali?!</button>
+            </span>
+            <span id="choice-response" class="choice-response" aria-live="polite"></span>
+            <span id="choice-followup"></span>
+            <span id="details-toggle" class="details-toggle" hidden>
+              View details
+              <button type="button" class="details-icon" aria-label="Open invitation details" aria-expanded="false">✉</button>
+            </span>
+              <div id="invite-letter" class="invite-modal" hidden>
+                <div class="falling-icons" id="falling-icons" aria-hidden="true"></div>
+                <div class="invite-letter" role="dialog" aria-modal="true" aria-labelledby="details-title">
+                  <button id="close-details" class="close-details" type="button" aria-label="Close invitation details">×</button>
+                  <p id="details-title">You're invited!</p>
+                  <p class="letter-intro">⋆˙⟡ ⋆.˚ ⊹₊⟡ ⋆ ⋆˙⟡ ⋆.˚ ⊹₊⟡ ⋆</p>
+                <dl>
+                  <div>
+                    <dt>Date</dt>
+                  <dd>November 8, 2026 (Sun)</dd>
+                </div>
+                <div>
+                  <dt>Time</dt>
+                  <dd>7:30 PM</dd>
+                </div>
+                <div>
+                  <dt>Place</dt>
+                  <dd>
+                    <span class="map-card">
+                      <iframe
+                        class="mini-map"
+                        title="Map showing The Mill"
+                        src="https://www.google.com/maps?q=The+Mill&output=embed"
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                      ></iframe>
+                    </span>
+                    <a href="https://www.google.com/maps/place/The+Mill/data=!4m2!3m1!1s0x0:0x420350486189a25c?sa=X&ved=1t:2428&ictx=111" target="_blank" rel="noopener noreferrer">The Mill</a>
+                  </dd>
+                </div>
+                <div>
+                  <dt>Dress</dt>
+                  <dd>Indian traditionals</dd>
+                </div>
+                <div>
+                  <dt>RSVP</dt>
+                  <dd>React to the invite link with ✔</dd>
+                </div>
+              </dl>
+              <p class="letter-note"><em>One last banger before the dark days ahead.</em></p>
+              <p class="letter-fact">Fun fact: Back in 2013, Diwali happened to be on Nov 3rd itself, so this is not the first time Jujhar is celebrating Diwali and bday together.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="music-toggle" id="music-toggle" type="button" aria-pressed="false">
+          <span aria-hidden="true">♫</span> <span id="music-label">play some tunes</span>
+        </button>
+        <button class="replay-button" id="replay-invite" type="button">« go back 2 homepage</button>
+      </section>
+    </main>
+    <div class="video-failure" id="video-failure" hidden>
+      <video id="failure-video" src="assets/You-Shall-Not-Pass.mp4" autoplay loop muted playsinline></video>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

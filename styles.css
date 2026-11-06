@@ -1,0 +1,588 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  color: #000;
+  background: #fff;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 16px;
+}
+
+.gate,
+.gate button,
+.gate input,
+.music-toggle,
+.replay-button {
+  font-family: "Times New Roman", Times, serif;
+}
+
+.invitation {
+  font-family: "Times New Roman", Times, serif;
+}
+
+button,
+a {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.invite-shell {
+  width: min(100% - 32px, 700px);
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 28px 0;
+}
+
+.stars,
+.glow,
+.sparkle {
+  display: none;
+}
+
+.intro,
+.invitation {
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0 0 24px;
+  color: #666;
+  font-size: 13px;
+}
+
+h1 {
+  margin: 0 0 12px;
+  color: #000080;
+  font-size: 34px;
+  font-weight: normal;
+}
+
+h1 span {
+  color: #000080;
+}
+
+.intro-copy {
+  margin: 0;
+}
+
+.envelope-button {
+  display: block;
+  margin: 42px auto 0;
+  padding: 0;
+  border: 0;
+  color: #000;
+  background: transparent;
+}
+
+.envelope {
+  display: block;
+  position: relative;
+  width: 240px;
+  height: 155px;
+  margin: auto;
+  border: 1px solid #000;
+  background: #eee;
+}
+
+.envelope-back,
+.envelope-front {
+  position: absolute;
+  inset: 0;
+}
+
+.envelope-paper {
+  position: absolute;
+  z-index: 1;
+  top: 10px;
+  left: 32px;
+  width: 174px;
+  height: 120px;
+  border: 1px solid #999;
+  background: #fff;
+}
+
+.envelope-paper::before {
+  content: "birthday";
+  display: block;
+  margin-top: 42px;
+  color: #000080;
+}
+
+.envelope-front {
+  z-index: 2;
+  clip-path: polygon(0 0, 50% 54%, 100% 0, 100% 100%, 0 100%);
+  border-top: 1px solid #000;
+  background: #eee;
+}
+
+.envelope-flap {
+  position: absolute;
+  z-index: 3;
+  inset: 0 0 auto;
+  height: 64%;
+  clip-path: polygon(0 0, 100% 0, 50% 83%);
+  border-bottom: 1px solid #000;
+  background: #ddd;
+}
+
+.seal {
+  position: absolute;
+  z-index: 4;
+  top: 62px;
+  left: 106px;
+  width: 28px;
+  height: 28px;
+  border: 1px solid #000;
+  border-radius: 50%;
+  color: #000;
+  background: #fff;
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.tap-hint {
+  display: block;
+  margin-top: 12px;
+  color: #0000ee;
+  text-decoration: underline;
+}
+
+.invitation {
+  display: none;
+  width: min(100%, 760px);
+  margin: 0 auto;
+}
+
+.invitation.visible {
+  display: block;
+}
+
+.card {
+  padding: 34px 18px;
+  border: 0;
+  background: transparent;
+}
+
+.scroll-text {
+  min-height: 180px;
+  width: min(100%, 1100px);
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 12px 4px;
+  font-family: "Times New Roman", Times, serif;
+  font-size: clamp(16px, 2.8vw, 21px);
+  line-height: 1.5;
+  color: #3a1640;
+  text-align: left;
+  text-shadow: 0 1px #fff;
+}
+
+.scroll-text span {
+  display: inline;
+}
+
+.scroll-text #story-body {
+  display: block;
+}
+
+.scroll-text #story-shout {
+  font-weight: bold;
+}
+
+.scroll-text #story-question,
+.choices,
+.choice-response {
+  display: block;
+  margin-top: 22px;
+}
+
+.scroll-text .choices {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: max-content;
+  max-width: 100%;
+  gap: 16px;
+}
+
+.scroll-text .choices[hidden] {
+  display: none;
+}
+
+.choices button {
+  width: auto;
+  padding: 8px 10px;
+  border: 1px solid #3a1640;
+  color: #3a1640;
+  background: rgba(255, 255, 255, .45);
+  font: inherit;
+  font-size: .9em;
+  text-align: left;
+}
+
+.choices button:hover,
+.choices button:focus-visible {
+  background: rgba(255, 255, 255, .8);
+}
+
+.choices button:disabled {
+  cursor: default;
+  opacity: .6;
+}
+
+.scroll-text .choice-response {
+  display: block;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.scroll-text #choice-followup {
+  display: block;
+  margin-top: 12px;
+}
+
+.details-toggle {
+  display: block;
+  margin-top: 24px;
+  color: #3a1640;
+}
+
+.details-icon {
+  margin-left: 6px;
+  padding: 0;
+  border: 0;
+  color: #3a1640;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+}
+
+.details-icon:hover,
+.details-icon:focus-visible {
+  color: #0000ee;
+}
+
+.invite-modal {
+  position: fixed;
+  z-index: 5;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(58, 22, 64, .25);
+}
+
+.invite-modal[hidden] {
+  display: none;
+}
+
+.falling-icons {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.falling-icon {
+  position: absolute;
+  top: -40px;
+  color: #3a1640;
+  font-size: 24px;
+  opacity: .75;
+  animation: fall-down var(--fall-duration) linear var(--fall-delay) infinite;
+}
+
+@keyframes fall-down {
+  from {
+    transform: translate3d(0, -40px, 0) rotate(0deg);
+  }
+  to {
+    transform: translate3d(var(--fall-drift), calc(100vh + 80px), 0) rotate(360deg);
+  }
+}
+
+.invite-letter {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 430px);
+  padding: 24px 18px 18px;
+  border: 1px solid #3a1640;
+  background: rgba(255, 255, 255, .9);
+  box-shadow: 4px 4px 0 rgba(58, 22, 64, .35);
+  font-family: Centaur, "Times New Roman", serif;
+  text-align: center;
+}
+
+.close-details {
+  position: absolute;
+  top: 5px;
+  right: 8px;
+  padding: 0;
+  border: 0;
+  color: #3a1640;
+  background: transparent;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.invite-letter p {
+  margin: 0 0 16px;
+  font-size: 1.25em;
+  font-weight: bold;
+}
+
+.invite-letter dl {
+  margin: 0;
+}
+
+.invite-letter dl > div {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 9px;
+  text-align: left;
+}
+
+.invite-letter dt {
+  width: 52px;
+  font-weight: bold;
+}
+
+.invite-letter dd {
+  margin: 0;
+}
+
+.map-card {
+  display: block;
+  width: 176px;
+  margin: 0 auto 8px;
+}
+
+.map-card + a {
+  display: block;
+  width: max-content;
+  margin: 0 auto;
+}
+
+.mini-map {
+  display: block;
+  width: 176px;
+  height: 110px;
+  border: 0;
+  border-radius: 8px;
+  box-shadow: 3px 3px 0 #f4bfdc;
+}
+
+.invite-letter .letter-intro,
+.invite-letter .letter-note {
+  font-size: 1em;
+  font-weight: normal;
+}
+
+.invite-letter .letter-note {
+  margin: 18px 0 0;
+}
+
+.invite-letter .letter-note em {
+  animation: note-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes note-pulse {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.invite-letter .letter-fact {
+  margin: 18px auto 0;
+  padding: 8px;
+  border: 1px solid #3a1640;
+  color: #7a3d68;
+  font-size: .78em;
+  font-weight: normal;
+  line-height: 1.35;
+}
+
+.invite-letter a {
+  color: #0000ee;
+}
+
+.music-toggle,
+.replay-button {
+  display: block;
+  margin: 18px auto 0;
+  padding: 0;
+  border: 0;
+  color: #0000ee;
+  background: transparent;
+  text-decoration: underline;
+}
+
+.replay-button {
+  margin-top: 10px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+body {
+  animation: warning-flash .16s steps(1, end) infinite;
+}
+
+@keyframes warning-flash {
+  0%, 49% {
+    background: #fff;
+  }
+  50%, 100% {
+    background: #f00;
+  }
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.invite-shell {
+  display: grid;
+  width: 100%;
+  min-height: 100vh;
+  padding: 0;
+  place-items: center;
+}
+
+.gate {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min(100vw, 700px);
+  text-align: center;
+}
+
+.gate-image {
+  display: block;
+  order: 2;
+  width: min(80vw, 500px);
+  max-height: 75vh;
+  margin: auto;
+  object-fit: contain;
+}
+
+.dialogue {
+  position: relative;
+  order: 1;
+  width: min(80vw, 420px);
+  margin: 0 auto 30px;
+  padding: 18px;
+  border: 3px solid #000;
+  border-radius: 22px;
+  background: #fff;
+  box-shadow: 3px 3px 0 #000;
+}
+
+.dialogue::after {
+  content: "";
+  position: absolute;
+  bottom: -17px;
+  left: 50%;
+  width: 28px;
+  height: 28px;
+  border-right: 3px solid #000;
+  border-bottom: 3px solid #000;
+  background: #fff;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.dialogue p {
+  flex: 1;
+  margin: 0;
+  text-align: center;
+  font-size: 24px;
+}
+
+.name-form {
+  display: grid;
+  gap: 10px;
+}
+
+.name-form label {
+  font-size: 20px;
+}
+
+.name-form input {
+  width: 100%;
+  border: 1px solid #000;
+  font: inherit;
+  font-size: 20px;
+}
+
+.name-form button,
+.success button {
+  width: max-content;
+  margin: auto;
+  padding: 3px 14px;
+  border: 1px solid #000;
+  background: #eee;
+  font-size: 18px;
+}
+
+.verification-status {
+  margin: 0;
+  font-size: 20px;
+}
+
+.success p {
+  margin-bottom: 14px;
+  font-size: 20px;
+}
+
+body.allowed {
+  animation: none;
+  background: lightcyan;
+}
+
+body.allowed .invitation {
+  width: 100%;
+  min-height: 100vh;
+  padding: 1px 16px 30px;
+  background-color: #fff;
+  background-image: url("assets/delicate-pink-geometric-rhombus-pattern-soft-aesthetic-design_737564-1764.avif");
+  background-repeat: repeat;
+  background-size: 180px auto;
+}
+
+body.allowed .invite-shell {
+  background: transparent;
+}
+
+.video-failure {
+  position: fixed;
+  z-index: 10;
+  inset: 0;
+  background: #000;
+}
+
+.video-failure video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
