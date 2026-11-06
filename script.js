@@ -231,7 +231,7 @@ choiceButtons.forEach((button) => {
       const run = storyRun;
       choiceFollowup.innerHTML = 'I shall be <s id="hijack-word"></s><span id="followup-rest"></span>';
       typeText(document.querySelector("#hijack-word"), "hijacking", run).then(() => {
-        return typeText(document.querySelector("#followup-rest"), " merging my bday revelries with those of our lovely festival this Sunday.", run);
+        return typeText(document.querySelector("#followup-rest"), " combining my bday revelries with those of our lovely festival this Sunday.", run);
       }).then(() => {
         if (run === storyRun) detailsToggle.hidden = false;
       });
