@@ -135,8 +135,8 @@ async function typeStory() {
   inviteLetter.hidden = true;
   detailsIcon.setAttribute("aria-expanded", "false");
   detailsIcon.setAttribute("aria-expanded", "false");
-  await typeText(storyIntro, "The story of this bday's commemoration is an unlucky one ⁽ᵒʳ ᶦˢ ᶦᵗᵗᵗᵗ⁾.", run);
-  await typeText(storyBody, "Due to scheduling conflicts, it was first pushed from the 3rd to the 5th, then from the 5th to the 7th. And then yours truly came to their senses and remembered:", run);
+  await typeText(storyIntro, "The story of this (Jujhar's 20th) bday's commemoration is an unlucky one ⁽ᵒʳ ᶦˢ ᶦᵗᵗᵗᵗ⁾.", run);
+  await typeText(storyBody, "Due to scheduling conflicts, it was first pushed from the 3rd of November to the 5th, then from the 5th to the 7th. And then yours truly came to their senses and remembered:", run);
   if (run !== storyRun) return;
   await typeText(storyShout, "ENDSEMS ARE BASICALLY HERE.", run, 180);
   await typeText(storyQuestion, "So, a change was made in the plans . . . can you guess what they shall be now?", run);
