@@ -176,10 +176,6 @@ function replayInvitation() {
 
 nameForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  const allowedNames = ["jujhar", "jesika", "vanshika", "ankila", "aditi", "pragati", "devansh", "virat", "aditya",
-                        "jujhar singh", "jesika poonia", "vanshika agarwal", "ankila bajaj", "aditi srivastava", "pragati jain", "devansh tandon", "virat sahlot", "aditya kalra",
-                        "jujhi", "jesu", "vanshi", "anki", "adeetee", "pragga", "litchi", "veera", "kalra"];
-  const firstName = humanName.value.trim().split(/\s+/)[0];
   const submitButton = nameForm.querySelector("button");
   const nameLabel = nameForm.querySelector("label");
   let dots = 1;
@@ -199,22 +195,37 @@ nameForm.addEventListener("submit", (event) => {
     }
   }, 350);
 
-  window.setTimeout(() => {
+  const verification = fetch("/api/verify-name", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name: humanName.value }),
+  }).then((response) => {
+    if (!response.ok) throw new Error(`Name verification failed with status ${response.status}`);
+    return response.json();
+  });
+
+  Promise.all([
+    verification,
+    new Promise((resolve) => window.setTimeout(resolve, 1400)),
+  ]).then(([result]) => {
     window.clearInterval(verificationTimer);
     verificationStatus.hidden = true;
-    if (!allowedNames.includes(firstName.toLowerCase())) {
+    if (!result.allowed) {
       showFailure();
       return;
     }
-    const formattedName = firstName.charAt(0).toUpperCase() + firstName.slice(1).toLowerCase();
-    successName.textContent = formattedName;
+    successName.textContent = result.firstName;
     document.body.classList.add("allowed");
     gateImage.src = "assets/happyjesus1.png";
     dialogueText.hidden = true;
     nameForm.hidden = true;
     success.hidden = false;
     proceedButton.focus();
-  }, 1400);
+  }).catch((error) => {
+    window.clearInterval(verificationTimer);
+    console.error(error);
+    showFailure();
+  });
 });
 
 proceedButton.addEventListener("click", openInvitation);
