@@ -303,7 +303,7 @@ h1 span {
     transform: translate3d(0, -40px, 0) rotate(0deg);
   }
   to {
-    transform: translate3d(var(--fall-drift), calc(100vh + 80px), 0) rotate(360deg);
+    transform: translate3d(var(--fall-drift), calc(100vh + 80px), 0) rotate(var(--fall-rotation));
   }
 }
 

@@ -273,6 +273,8 @@ function createFallingIcons() {
     element.style.setProperty("--fall-delay", `${(index % 6) * 0.7}s`);
     element.style.setProperty("--fall-duration", `${5 + (index % 4)}s`);
     element.style.setProperty("--fall-drift", `${index % 2 ? 35 : -35}px`);
+    const rotation = 180 + Math.floor(Math.random() * 361);
+    element.style.setProperty("--fall-rotation", `${Math.random() < 0.5 ? "-" : ""}${rotation}deg`);
     fallingIcons.append(element);
   });
 }
