@@ -35,6 +35,8 @@ const musicAudio = new Audio(`assets/track_${String(musicTrack).padStart(3, "0")
 musicAudio.loop = true;
 let storyRun = 0;
 let verificationTimer;
+let typewriterFast = false;
+let typewriterActive = false;
 
 function playChime() {
   const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -101,21 +103,25 @@ function openInvitation() {
   typeStory();
 }
 
-function typeText(element, text, run, delay = 42) {
+function typeText(element, text, run, delay = 42, resetSpeed = true) {
+  if (resetSpeed) typewriterFast = false;
+  typewriterActive = true;
   return new Promise((resolve) => {
     let index = 0;
     const typeNext = () => {
       if (run !== storyRun) {
+        typewriterActive = false;
         resolve();
         return;
       }
       element.textContent += text[index];
       index += 1;
       if (index >= text.length) {
+        typewriterActive = false;
         resolve();
         return;
       }
-      window.setTimeout(typeNext, delay);
+      window.setTimeout(typeNext, typewriterFast ? 2 : delay);
     };
     typeNext();
   });
@@ -124,17 +130,24 @@ function typeText(element, text, run, delay = 42) {
 async function typeStory() {
   storyRun += 1;
   const run = storyRun;
+  typewriterFast = false;
   storyIntro.textContent = "";
   storyBody.textContent = "";
   storyShout.textContent = "";
   storyQuestion.textContent = "";
   choices.hidden = true;
+  choices.classList.remove("results");
+  choices.querySelectorAll(".choice-marker").forEach((marker) => {
+    marker.textContent = "";
+  });
   choiceResponse.textContent = "";
   choiceFollowup.textContent = "";
   detailsToggle.hidden = true;
   inviteLetter.hidden = true;
   detailsIcon.setAttribute("aria-expanded", "false");
-  detailsIcon.setAttribute("aria-expanded", "false");
+  choiceButtons.forEach((choiceButton) => {
+    choiceButton.disabled = false;
+  });
   await typeText(storyIntro, "The story of this (Jujhar's 20th) bday's commemoration is an unlucky one ⁽ᵒʳ ᶦˢ ᶦᵗᵗᵗᵗ⁾.", run);
   await typeText(storyBody, "Due to scheduling conflicts, it was first pushed from the 3rd of November to the 5th, then from the 5th to the 7th. And then yours truly came to their senses and remembered:", run);
   if (run !== storyRun) return;
@@ -142,6 +155,16 @@ async function typeStory() {
   await typeText(storyQuestion, "So, a change was made in the plans . . . can you guess what they shall be now?", run);
   if (run === storyRun) choices.hidden = false;
 }
+
+document.addEventListener("keydown", (event) => {
+  if (event.key !== "Enter" || invitation.hidden) return;
+  event.preventDefault();
+  if (!choices.hidden && !choiceButtons[0].disabled) {
+    document.querySelector('[data-choice="diwali"]').click();
+    return;
+  }
+  if (typewriterActive) typewriterFast = true;
+});
 
 function replayInvitation() {
   storyRun += 1;
@@ -239,10 +262,16 @@ choiceButtons.forEach((button) => {
       choiceButtons.forEach((choiceButton) => {
         choiceButton.disabled = true;
       });
+      choices.classList.add("results");
+      choices.querySelector('[data-choice="party"] + .choice-marker').textContent = "✘";
+      choices.querySelector('[data-choice="study"] + .choice-marker').textContent = "✘";
+      choices.querySelector('[data-choice="diwali"] + .choice-marker').textContent = "✔";
       const run = storyRun;
-      choiceFollowup.innerHTML = 'I shall be <s id="hijack-word"></s><span id="followup-rest"></span>';
-      typeText(document.querySelector("#hijack-word"), "hijacking", run).then(() => {
-        return typeText(document.querySelector("#followup-rest"), " combining my bday revelries with those of our lovely festival this Sunday.", run);
+      choiceFollowup.innerHTML = '<span id="followup-intro"></span><s id="hijack-word"></s><span id="followup-rest"></span>';
+      typeText(document.querySelector("#followup-intro"), "I shall be ", run).then(() => {
+        return typeText(document.querySelector("#hijack-word"), "hijacking", run, 42, false);
+      }).then(() => {
+        return typeText(document.querySelector("#followup-rest"), " combining my bday revelries with those of our lovely festival this Sunday.", run, 42, false);
       }).then(() => {
         if (run === storyRun) detailsToggle.hidden = false;
       });

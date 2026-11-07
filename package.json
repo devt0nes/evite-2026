@@ -1,0 +1,10 @@
+{
+  "private": true,
+  "scripts": {
+    "local": "node scripts/local-server.js",
+    "vercel-local": "vercel dev --yes"
+  },
+  "devDependencies": {
+    "vercel": "^65.12.1"
+  }
+}

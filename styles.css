@@ -226,6 +226,23 @@ h1 span {
   text-align: left;
 }
 
+.scroll-text .choice-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.choice-marker {
+  display: none;
+  color: #000;
+  font-size: .85em;
+  line-height: 1;
+}
+
+.choices.results .choice-marker {
+  display: inline;
+}
+
 .choices button:hover,
 .choices button:focus-visible {
   background: rgba(255, 255, 255, .8);
